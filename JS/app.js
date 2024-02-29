@@ -40,6 +40,31 @@ class Bd {
         
         localStorage.setItem('id', id)
     }
+
+    recuperarTodosRegistros() {
+        
+        //array de despesas
+        let despesas = Array()
+
+        let id = localStorage.getItem('id')
+
+        //recuperar todas despesas cadastradas em localStorage
+        for(let i = 1; i <= id; i++) {
+
+            // recuperar despesa
+            let despesa = JSON.parse(localStorage.getItem(i))
+
+            //existe a possibilidade de haver índices que foram pulados/removidos nesses casos pular esses indices
+            if(despesa === null) {
+                continue
+            }
+
+            despesas.push(despesa)
+        }
+
+        return despesas
+
+    }
 }
 
 let bd = new Bd()
@@ -64,13 +89,31 @@ function cadastrarDespesa() {
 
     if (despesa.validarDados()) {
         bd.gravar(despesa)
-        //sucess dialog
-        $('#sucessoGravacao').modal('show')
-        console.log('dados validos')
-    } else {
-        //dialog de erro
-        $('#erroGravacao').modal('show')
-    }
 
-    //bd.gravar(despesa)
+        document.getElementById('modal_titulo').innerHTML = 'Registro inserido com sucesso'
+        document.getElementById('modal_titulo_div').className = "modal-header text-success"
+        document.getElementById('modal_conteudo').innerHTML = 'Despesa foi cadastrada com sucesso!'
+        document.getElementById('modal_btn').innerHTML = 'voltar'
+        document.getElementById('modal_btn').className = "btn btn-success"
+        
+        
+        $('#modalRegistraDespesa').modal('show')
+        
+    } else {
+        document.getElementById('modal_titulo').innerHTML = 'Erro na inclusão do registro'
+        document.getElementById('modal_titulo_div').className = "modal-header text-danger"
+        document.getElementById('modal_conteudo').innerHTML = 'Erro na gravação, verifique se todos os campos foram preenchidos corretamente!'
+        document.getElementById('modal_btn').innerHTML = 'voltar e corrigir'
+        document.getElementById('modal_btn').className = "btn btn-danger"
+        $('#modalRegistraDespesa').modal('show')
+    }
+}
+
+function carregaListaDespesas() {
+
+    let despesas = Array()
+
+    despesas = bd.recuperarTodosRegistros()
+
+    console.log(despesas)
 }

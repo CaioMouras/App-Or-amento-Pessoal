@@ -20,7 +20,6 @@
 
   <body>
 
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
       <div class="container">
         <a class="navbar-brand" href="#">
@@ -111,37 +110,19 @@
       </div>
     </div>
 
-    <!-- Modal Erro -->
-    <div class="modal fade" id="erroGravacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="modalRegistraDespesa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header text-danger">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Erro na gravação</h1>
+          <div id="modal_titulo_div">
+            <h3 class="modal-title fs-5" id="modal_titulo"></h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            Existem campos obrigatórios que não foram preenchidos!
+          <div class="modal-body" id="modal_conteudo">
+          
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Voltar e corrigir.</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal sucesso -->
-    <div class="modal fade" id="sucessoGravacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header text-success">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Registro inserido com sucesso</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            Despesa foi cadastrada com sucesso!
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Voltar.</button>
+            <button type="button" data-bs-dismiss="modal"  id="modal_btn"></button>
           </div>
         </div>
       </div>
