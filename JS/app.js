@@ -66,7 +66,46 @@ class Bd {
     }
 
     pesquisar(despesa) {
+        let despesasFiltradas = Array()
+
+        despesasFiltradas = this.recuperarTodosRegistros()
+
+        console.log(despesasFiltradas)
         console.log(despesa)
+
+        //ano
+        if(despesa.ano != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.ano == despesa.ano)
+        }
+        
+        //mes
+        if(despesa.mes != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.mes == despesa.mes)
+
+        }
+
+        //dia
+        if(despesa.dia != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.dia == despesa.dia)
+        }
+        
+        //tipo
+        if(despesa.tipo != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.tipo == despesa.tipo)
+
+        }
+
+        //descrição
+        if(despesa.descricao != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.descricao == despesa.descricao)
+        }
+        
+        //valor
+        if(despesa.valor != '') {
+            despesasFiltradas = despesasFiltradas.filter(d => d.valor == despesa.valor)
+        }
+
+        return despesasFiltradas
     }
 }
 
@@ -120,28 +159,18 @@ function cadastrarDespesa() {
     }
 }
 
-function carregaListaDespesas() {
+function carregaListaDespesas(despesas = Array(), filtro = false) {
 
-    let despesas = Array()
-
-    despesas = bd.recuperarTodosRegistros()
+    if(despesas.length == 0 && filtro == false) {
+        despesas = bd.recuperarTodosRegistros()
+    }
     
     //selecionando o elemento tbody da tabela
     let listaDespesas = document.getElementById('listaDespesas')
-
-    /*
-    <tr>
-        0 = <td>15/03/2018</td>
-        1 = <td>Alimentação</td>
-        2 = <td>Compras do mês</td>
-         3 = <td>444.75</td>
-    </tr>
-    */
+    listaDespesas.innerHTML = ''
 
     //percorrer o array despesas, listando cada despesa de forma dinamica
     despesas.forEach(function(d){
-
-        console.log(d)
         
         //Criando a linha(tr)
         let linha = listaDespesas.insertRow()
@@ -179,5 +208,8 @@ function pesquisarDespesa() {
 
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
 
-    bd.pesquisar(despesa)
+    let despesas = bd.pesquisar(despesa)
+
+    carregaListaDespesas(despesas, true)
+    
 }
